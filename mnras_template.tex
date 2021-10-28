@@ -47,10 +47,12 @@
 \usepackage{physics}
 \usepackage{lineno}
 \linenumbers
+\usepackage{ulem}
 % Only include extra packages if you really need them. Common packages are:
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
+\usepackage{xcolor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
@@ -65,6 +67,7 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
+\normalem
 \title[Metacalibration with Roman High-Latitude Imaging Survey]{Weak gravitational lensing shear estimates with \textsc{metacalibration} for the High-Latitude Imaging Survey Program of the \emph{Roman} Space Telescope}
 
 % The list of authors, and the short list which is used in the headers.
@@ -99,7 +102,7 @@ $^{6}$Department of Astronomy, The Ohio State University, 140 West 18th Avenue, 
 
 % Abstract of the paper
 \begin{abstract}
-We investigate the performance of the \textsc{metacalibration} scheme in the framework of the \emph{Nancy Grace Roman} Space Telescope (\emph{Roman}) image simulations. By comparing non-calibrated results from the previous work, shear calibration bias can be reduced significantly with \textsc{metacalibration}. Exploring shear bias is a robust way to test the requirements of the instrument and the overall weak lensing survey strategy. The weak lensing program of \emph{Roman} mission requires the galaxy shapes to be calibrated within about 0.03\%. To reach this goal, we can test our calibration scheme with these simulations and can isolate the sources where these residual shear biases come from, (whether it is the algorithm or detector physics). We incorporate several new updates that are more realistic and necessary to calibrate shear with a better precision relative to the previous version of the simulations. Without the coadditions of the single epoch images, across all three filters we are able to achieve the multiplicative bias of 0.70 per cent within 1.8 $\sigma$ with the current simulation volume. Meanwhile, average additive bias is not consistent with zero due to the strong correlation with the input PSF for one of the spin-2 component directions but consistent with zero for the other direction. This is worse for coadded images. We find no evidence that shape calibration becomes worse with decreasing image sampling factor based on the Nyquist sampling theorem. Overall, within the current simulation volume, we find that \textsc{metacalibration} can calibrate shapes with zero systematics on relatively undersampled images that \emph{Roman} will produce. In the future, we will need to substantially increase the simulation volume by 8 to reach the accuracy necessary for the program. 
+We investigate the performance of the \textsc{metacalibration} in the framework of the \emph{Nancy Grace Roman} Space Telescope (\emph{Roman}) image simulations. Compared with the non-calibrated results from the previous work, \textsc{metacalibration} can significantly reduce the shear calibration bias. Exploring shear bias is a robust way to test the requirements of the instrument and the overall weak lensing survey strategy. The weak lensing program of \emph{Roman} mission requires the galaxy shapes to be calibrated within about 0.03\%. To reach this goal, we can test our calibration scheme with these simulations and can isolate the sources where these residual shear biases arise. We incorporate \textcolor{red}{several new updates that are more realistic} and necessary to calibrate shear with a better precision relative to the previous version of the simulations. Without the coadditions of the single epoch images, across all three filters we are able to achieve the multiplicative bias of 0.70 per cent within 1.8 $\sigma$. Meanwhile, average additive bias is not consistent with zero due to the strong correlation with the input PSF for one of the spin-2 component directions. This additive bias is worse for the coadded images, while \textcolor{red}{the average multiplicative bias for multiband coadds was xxx}. We find no evidence that shape calibration becomes worse with decreasing image sampling factor based on the Nyquist sampling theorem. Overall, within the current simulation volume, we find that \textsc{metacalibration} can calibrate shapes with zero shear bias on relatively undersampled images that \emph{Roman} will produce. In the future, we will need to substantially increase the simulation volume by 8 to reach the accuracy necessary for the program. 
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -114,18 +117,17 @@ gravitational lensing: weak -- cosmology: observations -- techniques: image proc
 
 \section{Introduction}
 
-Since the formulation of the physical cosmological model, more observational evidence has shown that the contents of the universe are mostly in the dark sector (\citealt{2020A&A...633A..69H, 2018PhRvD..98d3528T, 2019PhRvL.122q1301A, 2019PASJ...71...43H, 2021A&A...645A.104A}). Within the dark sector, dark energy accounts for the accelerating expansion of the universe (e.g., \citealt{1998AJ....116.1009R, 1999AIPC..478..129P}) and the combination of dark energy and dark matter which only interacts with the same kind are responsible for the growth of the large-scale structure (\citealt{2015RPPh...78h6901K, 2017grle.book.....D}). The growth can be studied by carefully reconstructing the paths of the light leaving distant galaxies and going through the region where masses concentrate in the universe; this physical phenomenon is called gravitational lensing. “Weak” gravitational lensing causes a slight distortion to intrinsic galaxy shapes, and measuring the distorted shapes describes the gravitational shear field the light passes through. By using millions of these gravitationally lensed galaxies we can explore the matter density and the amplitude of matter fluctuation in the universe (e.g., \citealt{2001PhR...340..291B}). Measuring these quantities eventually help us learn the history of the development of the structure. For that reason, weak lensing is and will continue to be one of the key probes in the current and next-decade imaging surveys to constrain cosmological parameters with high precision. \par
+Since the formulation of the physical cosmological model, more observational evidence has shown that the contents of the universe are mostly in the dark sector (\citealt{2020A&A...633A..69H, 2018PhRvD..98d3528T, 2019PhRvL.122q1301A, 2019PASJ...71...43H, 2021A&A...645A.104A}). Within the sector, dark energy accounts for the accelerating expansion of the universe (e.g., \citealt{1998AJ....116.1009R, 1999AIPC..478..129P}) and the combination of dark energy and dark matter which only interacts with non-relativistic matter are responsible for the growth of the large-scale structure (\citealt{2015RPPh...78h6901K, 2017grle.book.....D}). The growth can be studied by carefully reconstructing the paths of the light leaving distant galaxies and going through the region where masses concentrate in the universe; this physical phenomenon is called gravitational lensing. “Weak” gravitational lensing causes a slight distortion to intrinsic galaxy shapes when observed from the Earth. By detecting millions of these gravitationally lensed galaxies and computing their distortion levels, we can explore the matter density and the amplitude of matter fluctuation in the universe (e.g., \citealt{2001PhR...340..291B}). Measuring these quantities eventually help us learn the history of the development of the large-scale structure in the universe. For that reason, weak lensing is and will continue to be one of the powerful probes in the current and next-decade imaging surveys to constrain cosmological parameters with high precision. \par
 
 
-Due to the subtlety in the lensing effect and its systematics dominant nature in the “weak” regime, observational efforts have been challenging. Over the past decade, large international collaborations such as the Dark Energy Survey\footnote{\url{http://www.darkenergysurvey.org/}} (DES: \citealt{2005astro.ph.10346T}), the Hyper Supreme-Cam\footnote{\url{http://hsc.mtk.nao.ac.jp/ssp/}} (HSC: \citealt{2018PASJ...70S...4A}), and the Kilo-Degree Survey\footnote{\url{http://kids.strw.leidenuniv.nl/}} (KiDS) have been successful at constraining the cosmological parameters, and the precision in calibrating the shapes of distant galaxies has reached a few percent (\citealt{2020arXiv201103408G, 2020arXiv201208567M, 2021A&A...645A.105G}) (include most recent HSC catalog). As we cover more areas in the sky and develop better tools (observatories and algorithms), we find more galaxies and we have already reached to the point where statistical and systematic uncertainties are comparable. Thus, the next-decade legacy surveys, the Stage IV surveys (\citealt{2006astro.ph..9591A}) such as Euclid\footnote{\url{ http://sci.esa.int/euclid}} (Euclid Study Scientist & the Science Advisory Team 2010), the Vera C. Rubin Observatory Legacy Survey of Space and Time\footnote{\url{ http://www.lsst.org}} (LSST: \citealt{2009arXiv0912.0201L, 2019ApJ...873..111I}), and \emph{Nancy Grace Roman} Space Telescope\footnote{\url{https://roman.gsfc.nasa.gov}} (\emph{Roman}: \citealt{2015arXiv150303757S}) require even better control of systematics. In order to manage the systematic uncertainties, we must develop realistic image simulations, apply the shape measurement on the simulated images, and determine any potential systematic effects and the strategy of mitigating them.  
+Due to the subtlety in the lensing effect and its systematics dominant nature in the “weak” regime, observational efforts have been challenging. Over the past decade, large international collaborations such as the Dark Energy Survey\footnote{\url{http://www.darkenergysurvey.org/}} (DES: \citealt{2005astro.ph.10346T}), the Hyper Supreme-Cam\footnote{\url{http://hsc.mtk.nao.ac.jp/ssp/}} (HSC: \citealt{2018PASJ...70S...4A}), and the Kilo-Degree Survey\footnote{\url{http://kids.strw.leidenuniv.nl/}} (KiDS) have been successful at constraining the cosmological parameters, and the precision in calibrating the shapes of distant galaxies has reached a few percent (\citealt{2020arXiv201103408G, 2020arXiv201208567M, 2021A&A...645A.105G}). As we cover more areas in the sky and develop better tools (observatories and algorithms), we find more galaxies and we have already reached to the point where statistical and systematic uncertainties are comparable. Thus, the next-decade legacy surveys, the Stage IV surveys (\citealt{2006astro.ph..9591A}) such as Euclid\footnote{\url{ http://sci.esa.int/euclid}} (Euclid Study Scientist \& the Science Advisory Team 2010), the Vera C. Rubin Observatory Legacy Survey of Space and Time\footnote{\url{ http://www.lsst.org}} (LSST: \citealt{2009arXiv0912.0201L, 2019ApJ...873..111I}), and \emph{Nancy Grace Roman} Space Telescope\footnote{\url{https://roman.gsfc.nasa.gov}} (\emph{Roman}: \citealt{2015arXiv150303757S}) require even better control of systematics. In order to manage the systematic uncertainties, we must develop realistic image simulations, apply the pre-existing shape measurement on the simulated images, and determine any potential systematic effects and build the strategy of mitigating them.  
 
 
-Based on our current knowledge, systematic biases for weak lensing science, both observational and astrophysical, could occur throughout imaging surveys (\citealt{2018ARA&A..56..393M}). Particularly, observational systematics can be found in, 
+Based on our current knowledge, systematic biases for weak lensing science, both observational and astrophysical, could occur throughout imaging surveys (e.g., \citealt{2018ARA&A..56..393M}). Particularly, observational systematics can be found in, 
 \begin{itemize}
     \item observing strategy
     \item instrumentation effects such as Brighter-Fatter Effect
     \item post-processing pipeline such as image coaddition and object detection
-    \item cosmological inference 
 \end{itemize} 
 
 
@@ -134,18 +136,18 @@ In this study, we focus on shear calibration bias, which describes the relations
     \gamma^{obs}_{i} = (1+m_{i})\gamma^{true}_{i} + c_{i}, 
     \label{eqn:linear}
 \end{equation}
-where i=(1,2) and $\gamma^{obs}_{i}$ is the two-component observed shear after calibrations and $\gamma^{true}_{i}$ is the true shear. This shear bias arises for various reasons. For space-based surveys, it can be mainly introduced in places such as PSF modelling, blending, and the undersampling of the image (e.g., \citealt{2018ARA&A..56..393M}). Additionally, complex detector effects such as brighter-fatter effect are the potential sources of bias (\citealt{2013MNRAS.429..661M}), where it is shown that for \emph{Roman} the effect of persistence will not be an issue (\citealt{2021arXiv210610273L}). Qualitatively, if the recovered shear is biased by 1$\%$ (m=1$\%$), $S_{8} = \sigma_{8} \sqrt{\Omega_{m}/0.3}$ would be biased about 1.5$\%$ in the final cosmology result. Thus, quantifying this shear bias before the survey is extremely important. \par
+where i=(1,2) and $\gamma^{obs}_{i}$ is the two-component observed shear after calibrations and $\gamma^{true}_{i}$ is the true shear. These shear biases arise for various reasons. For space-based surveys, it can be mainly introduced in places such as PSF modelling, blending, and the undersampling of the image (e.g., \citealt{2018ARA&A..56..393M}). Additionally, complex detector effects such as brighter-fatter effect are the potential sources of bias (\citealt{2013MNRAS.429..661M}), where it is shown that for \emph{Roman} the effect of persistence will not be an issue (\citealt{2021arXiv210610273L}). Qualitatively, if the recovered shear is biased by 1$\%$ (m=0.01), $S_{8} = \sigma_{8} \sqrt{\Omega_{m}/0.3}$ would be biased about 1.5$\%$ in the final cosmology result. Thus, quantifying these biases before the real survey is extremely important. \par
 
 
-Several shear calibration and bias mitigation efforts have been proposed by STEP (\citealt{2006MNRAS.368.1323H, 2007MNRAS.376...13M}) and GREAT (\citealt{2010MNRAS.405.2044B, 2013ApJS..205...12K, 2015MNRAS.450.2963M}) challenges, to meet the requirements for the current imaging surveys. In particular, one of the state-of-the-art self-calibration methods, \textsc{metacalibration} (\citealt{2017arXiv170202600H, 2017ApJ...841...24S}) has been shown to be able to reduce the significant of shear bias. It has also confirmed that the shear can be calibrated with \textsc{metacalibration} at a-few-percent level in DES (\citealt{2018MNRAS.481.1149Z, 2020arXiv201103408G}), without accounting for galaxy blending. Tackling the issue of blending is on the way of Y6 DES analysis with the shear-dependent detection and calibration technique (\textsc{metadetect}; \citealt{2020ApJ...902..138S}). While the major advantage of \textsc{metacalibration} is that it can be directly applied upon real galaxy images, which does not depend on galaxy morphology in simulations, the limitations for future surveys are not well-known. One possible limitation might lie in the effect of the undersampled images, because future space-based surveys like \emph{Euclid} and \emph{Roman} have such a small pixel scale that galaxy images will not be Nyquist sampled at native resolution (\citealt{2013PASP..125.1496S}) based on the Nyquist-Shannon Sampling Theorem. We define the sampling factor of each filter in \emph{Roman} to be, 
+Several shear calibration and bias mitigation efforts have been proposed by STEP (\citealt{2006MNRAS.368.1323H, 2007MNRAS.376...13M}) and GREAT (\citealt{2010MNRAS.405.2044B, 2013ApJS..205...12K, 2015MNRAS.450.2963M}) challenges, to meet the requirements for the current imaging surveys. In particular, one of the state-of-the-art self-calibration methods, \textsc{metacalibration} (\citealt{2017arXiv170202600H, 2017ApJ...841...24S}) has been shown to be able to reduce the significant of shear bias. It has also confirmed that the shear can be calibrated with \textsc{metacalibration} at a-few-percent level in DES (\citealt{2018MNRAS.481.1149Z, 2020arXiv201103408G}), without accounting for galaxy blending. Tackling the issue of blending is on the way of DES Y6 analysis with the shear-dependent detection and calibration technique (\textsc{metadetect}; \citealt{2020ApJ...902..138S}). While the major advantage of \textsc{metacalibration} is that it can be directly applied upon real galaxy images, which does not depend on galaxy morphology in simulations, the limitations for future surveys are not well-known. One possible limitation might lie in the effect of the undersampled images, because future space-based surveys like \emph{Euclid} and \emph{Roman} have such a small pixel scale that galaxy images will not be Nyquist sampled at a native resolution (\citealt{2013PASP..125.1496S}) based on the Nyquist-Shannon Sampling Theorem. We define the sampling factor of each filter in \emph{Roman} to be, 
 \begin{equation}
     Q = \frac{\lambda_{min}N_{f}}{p}, 
     \label{eqn:sampling}
 \end{equation}
-where $\lambda_{min}$ is the shortest wavelength of the incident light of the filter, $N_{f}$ is the focal ratio of the telescope ($N_{f}=7.8$ for \emph{Roman}) and $p$ is the pixel spacing of the sensor ($p=10\mu m$ for \emph{Roman}). The image with the sampling factor, $Q < 2$, is not Nyquist sampled and reffered to as the undersampled image. It is problematic to measure galaxy shapes solely from the undersampled images, because the \emph{Roman} PSF that will be used to recover the shapes is also undersampled and has a complex structure, not simply Gaussian. It is, therefore, necessary to build a robust strategy that can reconstruct better sampled PSF to allow unbiased shape measurement. 
+where $\lambda_{min}$ is the shortest wavelength of the incident light in the filter, $N_{f}$ is the focal ratio of the telescope ($N_{f}=7.8$ for \emph{Roman}) and $p$ is the pixel spacing of the sensor ($p=10\mu m$ for \emph{Roman}). The image with the sampling factor, $Q < 2$, is not Nyquist sampled and reffered to as the undersampled image. It is problematic to measure galaxy shapes solely from the undersampled images, because the \emph{Roman} PSF that will be used to recover the shapes is also undersampled and has a complex structure, not simply Gaussian. \textcolor{red}{It is, therefore, necessary to build a robust strategy that can reconstruct better sampled PSF to allow unbiased shape measurement. }
 
 
-Recently, Kannawadi et al. (2021) addressed this potential issue of the limitations of \textsc{metacalibration} on undersampled images on \emph{Euclid} image simulations and found that for \emph{Euclid} mission the shear estimate is biased about 1$\%$ (\citealt{2021MNRAS.502.4048K}). They mentioned that his result could be extended to the \emph{Roman} mission due to their similarities in the instruments and for \emph{Roman} they predicted the multiplicative bias was more than 1\% for H158 and F184 filters. Regardless of this extended result, we should validate if \textsc{metacalibration} is non-biased with the image simulations specifically made for the \emph{Roman} mission. Our work is based on the image simulation suite of the \emph{Roman} Space Telescope developed by \citet{2021MNRAS.501.2044T}, where we render star and galaxy images from \texttt{GalSim}\footnote{\url{ https://github.com/GalSim-developers/GalSim}} (\citealt{2015A&C....10..121R}). With a few simulation updates and an implementation of \textsc{metacalibration}, we can start to explore if the shear calibration goal of the High-Latitude Survey program for Roman ($m=~3.2\times10^{-4}$) (\citealt{2019BAAS...51c.341D}) can be achieved. \par
+Recently, Kannawadi et al. (2021) addressed this potential issue of the limitations of \textsc{metacalibration} on undersampled images on \emph{Euclid} image simulations. They found that for \emph{Euclid} mission the shear estimate is biased about 1$\%$ (\citealt{2021MNRAS.502.4048K}). It is mentioned that their result could be extended to the \emph{Roman} mission due to their similarities in the instruments and for \emph{Roman} they predicted the multiplicative bias was more than 1\% for H158 and F184 filters. Regardless of this extended result, we should validate if \textsc{metacalibration} is unbiased with the image simulations specifically made for the \emph{Roman} mission. Our work is based on the image simulation suite of the \emph{Roman} Space Telescope developed by \citet{2021MNRAS.501.2044T}, where we render star and galaxy images from \texttt{GalSim}\footnote{\url{ https://github.com/GalSim-developers/GalSim}} (\citealt{2015A&C....10..121R}). With a few simulation updates and an implementation of \textsc{metacalibration}, we can start to explore if the shear calibration goal of the High-Latitude Survey program for \emph{Roman} ($m=~3.2\times10^{-4}$) (\citealt{2019BAAS...51c.341D}) can be achieved. \par
 
 
 This paper is organized as follows. We briefly discuss the simulation suite details we used and the updates we implemented for this project in Sec.~\ref{sec:sims}. Then, in Sec.~\ref{sec:methods}, we show how coadditions of single exposure postage stamps are produced and how shape measurements are completed using \textsc{metacalibration}. We present the galaxy catalog properties and calibration results for single-band and multiband measurements in Sec.~\ref{sec:results}. Finally, in Sec.~\ref{sec:discussion}, we discuss how we will be able to constrain the shear bias better in terms of further updates in the image simulations and what we can conclude from this study. 
@@ -153,7 +155,7 @@ This paper is organized as follows. We briefly discuss the simulation suite deta
 
 \section{Simulations}
 \label{sec:sims}
-In this section, we briefly summarize the full simulation details from building a truth catalog to measuring galaxy shapes. Then we describe the simulation updates that are implemented particularly for this work.
+In this section, we briefly summarize the full simulation details from building a truth catalog to measuring galaxy shapes. Then we describe the simulation updates that are implemented for this work.
 \subsection{Simulation Summary}
 \label{subsec:imsim}
 The base of our image simulations of the \emph{Roman} Space Telescope is the \emph{Roman} simulation suite\footnote{\url{ https://github.com/matroxel/roman_imsim}} developed by \citet{2021MNRAS.501.2044T}, which renders realistic galaxy and star images on 18 Sensor-Chip Assemblies (SCAs) of a 2.5$\times$2.5 deg$^{2}$ patch of the sky provided the observing strategy for the 5-year reference mission and Cycle7 specifications\footnote{\url{https://roman.gsfc.nasa.gov/science/Roman_Reference_Information.html}}. We begin by creating a truth catalog using the simulated galaxy distribution from the Buzzard simulation (\citealt{2019arXiv190102401D}), photometric galaxy catalog sampled from the CANDELS survey (e.g., \citealt{2019ApJ...877..117H}), and Milky Way simulation (Galaxia; \citealt{2011ApJ...730....3S}) for star positions and magnitudes. Then, the following properties are applied to each galaxy.
@@ -171,7 +173,7 @@ The next step of the process is to create postage stamps and SCA images using \t
 
 
 
-After we generate the object stamps across all the SCAs and pointings, we create Multi-Epoch Data Structure (MEDS) files in which each unique object dictionary contains information of all the exposures. These MEDS files are generated according to the Hierarchical Equal Area isoLatitude Pixelisation (HEALPix) of $n_{side}=512$. These MEDS files contain all objects that are located in the area of the sky partitioned according to a HEALPix of $n_{side}$=512. Once the objects are sorted in MEDS files, we pass them and the corresponding PSF for the SCA to a shape measurement. We pass these multiple exposures with corresponding PSFs to \textsc{ngmix}\footnote{\url{ https://github.com/esheldon/ngmix}} to fit the galaxy shapes with the Gaussian mixture fitting method (\citealt{2014MNRAS.444L..25S}). This shape measurement process produces shape catalogs from which the shear calibration bias can be calculated with \textsc{metacalibration}.
+After we generate the object stamps across all the SCAs and pointings, we create Multi-Epoch Data Structure (MEDS) files in which each unique object dictionary contains information of all the exposures. These MEDS files are generated according to the Hierarchical Equal Area isoLatitude Pixelisation (HEALPix) of $n_{side}=512$. These MEDS files contain all objects that are located in the area of the sky partitioned according to a HEALPix of $n_{side}$=512. Once the objects are sorted in MEDS files, we pass these multiple exposures with the corresponding PSF to \textsc{ngmix}\footnote{\url{ https://github.com/esheldon/ngmix}} to fit the galaxy shapes with the Gaussian mixture fitting method (\citealt{2014MNRAS.444L..25S}). This shape measurement process produces shape catalogs from which the shear calibration bias can be calculated with \textsc{metacalibration}.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{figure1.pdf}
@@ -189,16 +191,19 @@ After we generate the object stamps across all the SCAs and pointings, we create
 
 
 \subsection{Simulation Updates}
-In order to accomplish science goals, and build and test the pipelines of weak lensing program in \emph{Roman}, we must keep updating the simulations to be more realistic. Along the way to test calibrating shears using \textsc{metacalibration}, we have implemented and made updates to the following parts of the simulation framework. 
+In order to accomplish science goals, and build and test the pipelines of weak lensing program in \emph{Roman}, we must keep updating the simulations to be more realistic. We have implemented and made updates to the following parts of the simulation framework to be able to measure unbiased shapes with \textsc{metacalibration}. 
 \begin{itemize}
     \setlength\itemsep{1em}
     \item \textbf{Saturation Cuts}:
     We have implemented the pixel saturation of 100,000 electrons. This value is an approximate pixel saturation but in the next generation of the simulations we will use the true saturation from the flight candidate detectors. 
+    
     \item \textbf{Rotation of the \emph{Roman} PSF on the sky}:
-    In the study by Troxel et al. (2021), the rotations of the \emph{Roman} PSF with respect to the telescope rotation were not engaged properly by \texttt{galsim.roman} module. Since a non-rotating PSF could trigger a preferred direction in the shapes when being deconvolved, we believe that this contributed to the non-zero multiplicative bias. There has been an update in \texttt{galsim.roman} module to correctly rotate the PSF given the WCS on the SCA. Figure \ref{fig:psfrot} shows a toy PSF of the same pointing but with a different rotation angle of the telescope. 
-    \item \textbf{Single-band and multiband Coadds}: 
-    We have added and modified the postage stamp coadds (\texttt{psc}) algorithm\footnote{\url{https://github.com/esheldon/psc}} to create coadditions of single-epoch postage stamps. Coadds are usually performed to enhance the signal-to-noise ratio (S/N) of an object and mitigate the potential systematics for an accurate shape measurement. If we take advantage of fitting an object in the coadd instead of fitting multiple images of each object in each filter, we can save a factor of 6 in computing time, which is the average number of exposures from the reference survey. Additionally, coadding is one way to reduce the effect of the undersampling of the images since by coadding multiple exposures the product is naturally better sampled. Thus, for these reasons, we must utilize a coadding scheme for the \emph{Roman} galaxies. We can turn this on and off so that the effect of undersampling is clear. The detailed overview of the coadd process in \texttt{psc} is in Sec. \ref{subsec:psc}. 
-    \item \textbf{\textsc{metacalibration} implementation}: We used \textsc{metacalibration}\footnote{\url{https://github.com/esheldon/ngmix/wiki/Metacalibration}} bootstrapper method, which is a wrapper class to run measurements in the \textsc{ngmix} package and is used extensively to produce weak lensing shape catalog in DES Y3 analysis. \textsc{metacalibration} process takes place after making coadded images, if applicable for the coadd measurements. With this calibration method, we hope to significantly reduce some of the shear calibration bias Troxel et al. (2021) measured. The detailed overview of \textsc{metacalibration} can be found in Sec.\ref{subsec:mcal}. 
+    In the study by Troxel et al. (2021), the rotations of the \emph{Roman} PSF with respect to the telescope rotation were not engaged properly by \texttt{galsim.roman} module. Since a non-rotating PSF could trigger a preferred direction in the shapes when being deconvolved, we believe that this contributed to the non-zero multiplicative bias result. There has been an update in \texttt{galsim.roman} module to correctly rotate the PSF given the WCS on the SCA. Figure \ref{fig:psfrot} shows a toy PSF of the same pointing but with a different rotation angle of the telescope. 
+    
+    \item \textbf{Single-band and Multiband Coadds}: 
+    We have added and modified the postage stamp coadds (\texttt{psc}) algorithm\footnote{\url{https://github.com/esheldon/psc}} to create coadditions of single-epoch postage stamps. Coadds are usually performed to enhance the signal-to-noise ratio (S/N) of an object and mitigate the measurement noise. If we take advantage of fitting an object in the coadd instead of fitting multiple images of each object in each filter, we can save a factor of 6 in computing time, which is the average number of exposures from the reference survey. Additionally, coadding is one way to reduce the effect of the undersampling of the images since the coadd is naturally better sampled. For these reasons, we must utilize a coadding scheme for the \emph{Roman} galaxies. The detailed overview of the coadd process in \texttt{psc} is in Sec. \ref{subsec:psc}. 
+    
+    \item \textbf{\textsc{metacalibration} in \textsc{ngmix}}: We implemented \textsc{metacalibration}\footnote{\url{https://github.com/esheldon/ngmix/wiki/Metacalibration}} bootstrapper method, which is a wrapper class to run measurements in the \textsc{ngmix} package and is used extensively to produce weak lensing shape catalog in DES Y3 analysis. \textsc{metacalibration} process takes place after making coadded images. \textsc{ngmix} is able to fit multiple exposures in case for measuring shapes on single-epoch images. With this calibration method, we hope to significantly reduce some of the shear calibration bias Troxel et al. (2021) measured. The detailed overview of \textsc{metacalibration} can be found in Sec.\ref{subsec:mcal}. 
     %\item (Any other changes?)
 \end{itemize}
 
@@ -209,15 +214,15 @@ In order to accomplish science goals, and build and test the pipelines of weak l
 
 \section{Post-catalog Processes}
 \label{sec:methods}
-Our goal is to show that the recovered shapes with \textsc{metacalibration} are non-biased. In order to do so, we need to build a measurement pipeline within the simulation framework that contributes to the final measurement. In this section, we present in detail how coadds are produced with \texttt{psc} from the undersampled single-epoch images, how \textsc{metacalibration} calibrates shapes, and how we measure the shear calibration bias from the \textsc{metacalibration} catalog. 
+Our goal is to show that the recovered shapes with \textsc{metacalibration} are non-biased. In order to do so, we need to build a measurement pipeline within the current simulation framework that contributes to the final measurement. In this section, we present in detail how coadds are produced with \texttt{psc} from the undersampled single-epoch images, how \textsc{metacalibration} calibrates shapes, and how we measure the shear calibration bias from the \textsc{metacalibration} catalog. 
 
 
 \subsection{Postage Stamp Coadds}
 \label{subsec:psc}
-Coaddition is the process that reconstructs a Nyquist-sampled image out of multiple exposures of an object. While this process can benefit in increasing the S/N value of an object and reducing the impact of pixel noise, several challenges need to be addressed for images that are taken with equatorial mount telescopes, which can only move vertically and horizontally, and for images with telescopes that can rotate. When the rotation is introduced, this coadding process becomes more complex to interpolate the image to stack pixel grid. While coaddition could introduce systematic bias due to the complexity of the original PSF and its interpolation scheme, the undersampling of the images can be overcome. We describe our coaddition pipeline that is based on \texttt{psc}.
+Coaddition is the process that reconstructs a Nyquist-sampled image out of multiple exposures of an object. While this process can benefit in increasing the S/N value of an object and reducing the impact of pixel noise, several challenges need to be addressed for images taken with telescopes that can rotate. When the rotation is introduced, this coadding process becomes more complex to interpolate the image to stack pixel grid. While coaddition could introduce systematic bias due to the complexity of the original PSF and its interpolation scheme, the bias with the undersampled images can be overcome \textcolor{red}{by the combinations of the effective coadding process and the careful treatment of the input PSF}. We describe our coaddition pipeline that is based on \texttt{psc}.
 
 
-We reconstruct the Nyquist-sampled image from multiple exposures in MEDS files. For the coaddition of the PSF, we choose to coadd the image with the oversampled PSF over the undersampled original PSF. We oversample the original PSF by a factor of 4 to simulate the better sampled PSF that \emph{Roman} will eventually produce when it constructs the PSF from the full focal plane. It will be highly resolved than native pixel scale. For each exposure of the object we render the \emph{Roman} PSF with a stamp size of 32 pixels at the galaxy centroid. We modified the original code to improve performance of our algorithm, and these modifications are listed below with the general coadding process in \texttt{psc}. 
+We reconstruct the Nyquist-sampled image from multiple exposures in MEDS files. For the coaddition of the PSF, we choose to coadd the image with the oversampled PSF. We oversample the original PSF by a factor of 4 to simulate the better sampled PSF that \emph{Roman} will eventually produce when it constructs the PSF from the full focal plane. It will be highly resolved than native pixel scale. For each exposure of the object we render the \emph{Roman} PSF with a stamp size of 32 pixels at the galaxy centroid, not the image centroid. We modified the original code to improve performance of the \textsc{metacalibration} process later, and these modifications are listed below with the general coadding process in \texttt{psc}. 
 
 The algorithm: 
 \begin{enumerate}
@@ -233,12 +238,12 @@ The algorithm:
 Figure \ref{fig:singlecoadd} shows an example of the simulated single-epoch and coadded images and PSFs for objects with low and high S/N. Note that the shape and struts pattern in the original PSF can be washed out by coadding the rotationally dithered PSFs. 
 
 
-Before we calibrate and measure shapes with \textsc{ngmix}, we downsample the high-resolution PSF to the original pixel size. Figure \ref{fig:coadd_oversample_res} shows the coadded oversampled PSF and the then-downsampled PSF, and their differences. We downsampled the oversampled PSF (128 x 128 pixels) by summing 4 square-pixels and creating the original size PSF (32 x 32 pixels), in order to ensure that the shape fit with \textsc{ngmix} can be processed. Since a better sampled PSF generally enables the shape of the PSF to be more isotropic, from the difference image in Figure \ref{fig:coadd_oversample_res}, we can state that the original PSF has an anisotropic shape, which can lead to biased shape measurement. 
+Before we calibrate and measure shapes with \textsc{ngmix}, we downsample the high-resolution PSF to the original pixel size. Figure \ref{fig:coadd_oversample_res} shows the coadded oversampled PSF and the then-downsampled PSF, and their differences. We downsampled the oversampled PSF (128 x 128 pixels) by summing 4 square-pixels and creating the original size PSF (32 x 32 pixels), in order to ensure that the shape fit with \textsc{ngmix} can be processed. Since a better sampled PSF generally enables the shape of the PSF to be more isotropic, we can state that the original PSF can lead to the biased shape measurement from Figure \ref{fig:coadd_oversample_res}. 
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{figure3.pdf}
     \vspace*{-5mm}
-    \caption{The left and middle panel of the figure illustrates the coadded \emph{Roman} PSF at its native pixel scale and the coadded PSF with a pixel scale that is smaller by a factor of 4. These are visualized in a log scale. The right panel shows the difference image between the two PSFs. }
+    \caption{The left and middle panel of the figure illustrates the coadded \emph{Roman} PSF at its native pixel scale and the coadded PSF with a pixel scale that is oversampled by a factor of 4 and then down-sampled. These are visualized in a log scale. The right panel shows the difference image between the two linear-scaled PSFs. }
     \label{fig:coadd_oversample_res}
 \end{figure}
 
@@ -253,7 +258,7 @@ Finally, Figure \ref{fig:single_to_coadd_rgb} shows the coadd products in differ
 
 \par
 
-\subsection{Shape measurement with \textsc{metacalibration}}
+\subsection{Shape Measurement with \textsc{metacalibration}}
 \label{subsec:mcal}
 Once we construct the coadds from the galaxy catalogs to recover the shear signal, we feed them into the \textsc{metacalibration} process. The bootstrapper method in \textsc{ngmix} wraps the \textsc{metacalibration} and the shape fit steps. The priors passed to the fit are listed below. 
 
@@ -275,7 +280,7 @@ Once we construct the coadds from the galaxy catalogs to recover the shear signa
 \end{table}
 
 
-Once we have the \textsc{metacalibration} catalog, we can calculate shear calibration bias from the measured object ellipticities, \vb*{e} = ($e_{1}$, $e_{2}$). The observed ellipticities can be approximated using a Taylor expansion around the two-component shear, $\vb*{\gamma}=0$. Higher terms here can be dropped assuming the gravitational shear is small. It is also known that \textsc{metacalibration} works under the same assumption, otherwise the recovered shear would be biased. It is challenging to find a good input shear that results in higher S/N of an object and unbiased shape measurement. We verify that our input gravitational shear is unbiased in \textsc{metacalibration} framework and the uncertainty in the recovered shape is small enough by constructing the same but simpler framework of the fiducial image simulations which renders Gaussian profile galaxy and PSF on the \emph{Roman} pixel scale cutout image without any detector effects. Figure \ref{fig:metacal_shear_linear} demonstrates that even with the simple enough simulations \textsc{metacalibration} becomes biased after $g=0.05$ since the assumption is starting to break down. 
+Once we have the \textsc{metacalibration} catalog, we can calculate shear calibration bias from the measured object ellipticities, $\vb*{e}$ = ($e_{1}$, $e_{2}$). The observed ellipticities can be approximated using a Taylor expansion around the two-component shear, $\vb*{\gamma}=0$. Higher terms here can be dropped assuming the gravitational shear is small. It is also known that \textsc{metacalibration} works under the same assumption, otherwise the recovered shear would be biased. It is challenging to find a good input shear that results in higher S/N of an object and unbiased shape measurement. We verify that our input gravitational shear is unbiased in \textsc{metacalibration} framework and the uncertainty in the recovered shape is small enough by constructing the same but simpler framework of the fiducial image simulations which renders Gaussian profile galaxy and PSF on the \emph{Roman} pixel scale cutout image without any detector effects. Figure \ref{fig:metacal_shear_linear} demonstrates that even with the simple enough simulations \textsc{metacalibration} becomes biased after $g=0.05$ since the assumption is starting to break down. 
 \begin{equation}
     \vb*{e} = \vb*{e}\rvert_{\vb*{\gamma}=0} + \frac{\partial \vb*{e}}{\partial \vb*{\gamma}}\bigg\rvert_{\vb*{\gamma}=0}\vb*{\gamma} + \ldots
 \end{equation}
@@ -292,6 +297,13 @@ For each redshift bin, the ensemble mean of measured ellipticities $\langle\vb*{
     \langle\vb*{e}\rangle \approx \langle \vb*{R}\vb*{\gamma} \rangle. 
 \end{equation} 
 In actual observations, the observable is the galaxy shapes $\langle\vb*{e}\rangle$ and we can take advantage of image simulations and calculate the shear response of the particular calibration technique we employ, and finally compute the gravitational lensing shear signal $\langle\vb*{\gamma}\rangle$. 
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{metacal_bias_shear.png}
+    \vspace*{-5mm}
+    \caption{It shows the quadratic relationship between the input gravitational shear for the simple simulations and the multiplicative bias estimated from the recovered shape in the \textsc{metacalibration} catalogs. }
+    \label{fig:metacal_shear_linear}
+\end{figure}
 
 
 \textsc{metacalibration} creates one unsheared and four artificially-sheared images of each galaxy stamp. Each is deconvolved with the original PSF, unsheard or sheared with the gravitational shear of $\gamma=0.01$ in four directions ($+g1$, $-g1$, $+g2$, $-g2$) and re-convolved with a new slightly larger isotropic, Gaussian PSF. In our simulation framework, we know the exact input shear and five measured galaxy shapes for each galaxy produced by \textsc{metacalibration} and fitted with the Gaussian mixture method in \textsc{ngmix}. We can calculate the ensemble mean of the shear response from the five versions of \textsc{metacalibration} catalog with the equation below. 
@@ -332,80 +344,64 @@ The covariances are computed using the bootstrap estimate of standard error. Fro
 \end{equation}
 where we use sample $N$=200. 
 
-\begin{figure}
-	\includegraphics[width=\columnwidth]{metacal_bias_shear.png}
-    \vspace*{-5mm}
-    \caption{It shows the quadratic relationship between the input gravitational shear for the simple simulations and the multiplicative bias estimated from the recovered shape in the \textsc{metacalibration} catalogs. }
-    \label{fig:metacal_shear_linear}
-\end{figure}
+\textcolor{red}{\textsc{ngmix} utilizes xx method to compute the size of the galaxy, while we compute the adaptive moments of objects to measure the shape and size of the input PSF (\citealt{2003MNRAS.343..459H})}. 
+
 
 \section{Results}
 \label{sec:results}
-In this section, we present the characteristics of the simulated data products. We divide our shape measurements into two categories; single-band and multiband. For single-band measurements, in each filter, we measure the shapes from the original single exposures by joint-fitting them. We set our base case to be this single-band joint-fit measurement. As the more developed case, we measure shapes with the single-band coadd in each filter by single-fitting it. For one multiband measurement, we match the objects, accumulate the single exposures from each filter catalog and measure the shapes with the joint-fit. The other multiband measurement joint-fit the three coadds from each filter together to recover the shape. 
+In this section, we present the properties of the simulated data products and the shape measurement results from various simulation variants. We divide our shape measurements into two categories; single-band and multiband. For single-band measurements, in each filter, we measure the shapes from the original single exposures by joint-fitting them. We set our base case to be this single-band joint-fit measurement. As the more developed case, we measure shapes with the single-band coadd in each filter by single-fitting it. For one multiband measurement, we match the objects between each filter and measure the shapes with the joint-fit of single exposures across all the filters. The other multiband measurement joint-fit the three coadds from each filter to recover the shapes. 
 
+\subsection{Statistics of the Shape Catalog}
+From the COSMOS catalog, based on the \emph{Roman} Weak Lensing mission requirements, objects are pre-selected and simulated. In total, we simulate 907,170 galaxies on 18 SCAs across 198 pointings for F184, 227 pointings for H158, and 238 pointings for J129 bandpass. We do not make any selection cuts on the simulated catalogs based on measured properties. Even so, due to the misestimation of the PSF or low S/N, the Gaussian mixture in \textsc{ngmix} fails to fit about 5\% of all simulated objects, and so the total number of the recovered objects for single-band measurements is, 861,960 for F184, 863,358 for H158, and 859,645 for J129. For the multiband (H158+J129+F184) coadd measurements, we measure objects that are found by all of the filters and the total number of the recovered objects is 851,821.
+Figure \ref{fig:true_properties} and \ref{fig:measured_properties} show the true properties from the truth catalog and measured properties from the \textsc{metacalibration} shape catalogs. 
 
-From the COSMOS catalog, based on the \emph{Roman} Weak Lensing mission requirements, objects are pre-selected and simulated. In total, we simulate 907,170 galaxies on 18 SCAs across 198 pointings for F184, 227 pointings for H158, and 238 pointings for J129 bandpass. We do not make any selection cuts on the simulated catalogs based on measured properties. Even so, due to the misestimation of the PSF or low S/N, the Gaussian mixture fit with \textsc{ngmix} fails about 5\% of all simulated objects, and so the total number of the recovered objects for single-band measurements is, 861,960 for F184, 863,358 for H158, and 859,645 for J129. For the multiband (H158+J129+F184) coadd measurements, we measure objects that are covered by all of the filters and the total number of the recovered objects is 851,821.
-Here are the measured properties of the objects in the \textsc{metacalibration} shape catalogs. 
+\begin{figure}
+    \hspace*{-1.5cm}
+	\includegraphics[scale=0.3]{true_properties.pdf}
+	\centering
+    \caption{The left panel shows input galaxies magnitudes for all the 3 filter we have used to measure shapes. The mean magnitude for H158, F184, J129 are respectively 23.098, 22.976, and 23.273. The right panel shows the half-light radius in units of arcsec for H158 for input and measured objects. The mean half-light radii for input and measured galaxies are 0.294 and 0.221 arcsec for H158. For these histograms, we are showing the objects with the successful fit in \textsc{ngmix}.}
+    \label{fig:true_properties}
+\end{figure}
 
-
-% (galaxy and PSF properties; SNR, $e_{1,psf}$, $e_{2,psf}$, PSF FWHM) 
-% havent decided on which plot to use. 
-% \begin{figure}
-% 	\includegraphics[width=\columnwidth]{figure5.pdf}
-%     \caption{}
-%     \label{fig:psf_properties}
-% \end{figure}
-% \begin{figure}
-% 	\includegraphics[width=\columnwidth]{figure6.pdf}
-%     \caption{}
-%     \label{fig:other_properties}
-% \end{figure}
+\begin{figure*}
+    \hspace*{-3.0cm}
+    \centering
+	\includegraphics[scale=0.34]{ngmix_snr_T.pdf}
+    \caption{add multiband to each window and F184 coadd for PSF properties.}
+    \label{fig:measured_properties}
+\end{figure*}
 
 
 \subsection{Shape Calibration Bias}
 \label{subsec:shapes}
 We compute the estimated values of multiplicative and additive bias from the recovered shear with \textsc{metacalibration}. The results from the complete set of different runs are in Table \ref{tab:bias_summary} and the summary plot can be found in Figure \ref{fig:final_result}.  
 
-For the single-band measurements, we can use the sampling factor defined in Equation \ref{eqn:sampling} to visualize the relationship between the sampling factor and the shear bias. The sampling factor is an indication of how undersampled the image in the filter is and it is respectively $Q_{J129}=1.01, Q_{H158}=1.23, Q_{F184}=1.44$. This was previously explored in \citealt{2021MNRAS.502.4048K}, where they found that the estimates shear bias has a large dependence on the sampling factor. We note that we have run \textsc{metacalibration} with \texttt{fitgauss} and \texttt{gauss} parameters for the new PSF model, and we found that it is preferrable to use \texttt{gauss} for our case. Hence, from here we present the result that is calibrated with \texttt{gauss} PSF model for \textsc{metacalibration}. The multiplicative bias of single-band single-epochs measurements for each filter is, 1.04$\pm$0.47 per cent for J129, -1.30$\pm$0.46 per cent for H158 and -0.40$\pm$0.53 per cent for F184. When the coadds of each filter are used, the bias becomes, -0.47$\pm$0.49 per cent for J129, -0.07$\pm$0.45 per cent for H158 and -0.06$\pm$0.61 per cent for F184. Coadd results are consistent with zero multiplicative bias within 1 sigma and the signals increase by xx per cent. Generally, coadding produces better sampled images as in Figure\ref{fig:single_to_coadd_rgb} and less multiplicative bias than single epochs measurements. We can conclude that in the \emph{Roman} simulation we have seen that the multiplicative bias has no strong dependence on the sampling factor.
+For the single-band measurements, we can use the sampling factor defined in Equation \ref{eqn:sampling} to visualize the relationship between the sampling factor and the shear bias. The sampling factor is an indication of how undersampled the image in the filter is and it is respectively $Q_{J129}=1.01, Q_{H158}=1.23, Q_{F184}=1.44$. This was previously explored in \citealt{2021MNRAS.502.4048K}, where they found that the estimates shear bias has a large dependence on the sampling factor. We note that we have run \textsc{metacalibration} with \texttt{fitgauss} and \texttt{gauss} parameters for the new PSF model, and we found that it is preferrable to use \texttt{gauss} for our case. Hence, from here we present the result that is calibrated with \texttt{gauss} PSF model for \textsc{metacalibration}. The multiplicative bias of single-band single-epochs measurements for each filter is, 1.04$\pm$0.47 per cent for J129, -1.30$\pm$0.46 per cent for H158 and -0.40$\pm$0.53 per cent for F184. When the coadds of each filter are used, the bias becomes, -0.47$\pm$0.49 per cent for J129, -0.07$\pm$0.45 per cent for H158 and -0.06$\pm$0.61 per cent for F184. Coadd results are consistent with zero multiplicative bias within 1 sigma and the signals increase by xx per cent. Generally, coadding produces better sampled images as in Figure \ref{fig:single_to_coadd_rgb} and less multiplicative bias than single epochs measurements. We can conclude that in the \emph{Roman} simulation we have seen that the multiplicative bias has no strong dependence on the sampling factor.
 
 
-Meanwhile the measured additive bias is the same level as the Y3 analysis in DES. The additive bias of the single-band single-epochs measurements for each filter is, (3.22$\pm$0.92)$10^{-4}$ for J129, (2.63$\pm$0.88)$10^{-4}$ for H158 and (3.25$\pm$1.11)$10^{-4}$ for F184. When the coadds of each filter are used, the bias becomes, (3.39$\pm$0.90)$10^{-4}$ for J129, (8.08$\pm$0.87)$10^{-4}$ for H158 and (9.36$\pm$1.10)$10^{-4}$ for F184. From the Table \ref{tab:bias_table}, it is worth noting that the coadd process clearly introduces non-trivial additive biases in one direction, but not the other. We believe this is due to the effect of an imperfect PSF model. We see this in the Figure xx where the recovered shear has a strong linear dependence on the PSF ellipticity measured by an adaptive moments method. The impact of the PSF leakage can be estimated by computing $\rho$-statistics (\citealt{2008A&A...484...67P, 2010MNRAS.404..350R, 2016MNRAS.460.2245J}). However, we do not explore the $\rho$-statistics for our PSF model since it is an approximation to accurately represent the features of the instrument, not computed from the real pupil plane images, and the coadding scheme for the 5-year mission has not been finalized yet. 
+Meanwhile the measured additive bias is the same level as the Y3 analysis in DES. The additive bias of the single-band single-epochs measurements for each filter is, (3.22$\pm$0.92)$10^{-4}$ for J129, (2.63$\pm$0.88)$10^{-4}$ for H158 and (3.25$\pm$1.11)$10^{-4}$ for F184. When the coadds of each filter are used, the bias becomes, (3.39$\pm$0.90)$10^{-4}$ for J129, (8.08$\pm$0.87)$10^{-4}$ for H158 and (9.36$\pm$1.10)$10^{-4}$ for F184. From the Table \ref{tab:result}, it is worth noting that the coadd process clearly introduces non-trivial additive biases in one direction, but not the other. We believe this is due to the effect of an imperfect PSF model. We see this in the Figure xx where the recovered shear has a strong linear dependence on the PSF ellipticity measured by an adaptive moments method. The impact of the PSF leakage can be estimated by computing $\rho$-statistics (\citealt{2008A&A...484...67P, 2010MNRAS.404..350R, 2016MNRAS.460.2245J}). However, we do not explore the $\rho$-statistics for our PSF model since it is an approximation to accurately represent the features of the instrument, not computed from the real pupil plane images, and the coadding scheme for the 5-year mission has not been finalized yet. 
 
 
 Next, we pressent the results with multiband measurements. We performed multiband measurements with 3 filters used in the previous measurements. One multiband measurement used all of the single epoch images from all the filters and joint-fit the shape of the galaxy. The multiplicative and additive bias is, respectively, $m=(-0.70\pm0.39)$ per cent and $c=(2.96\pm0.85)10^{-4}$. The other measurement performed the joint-fit on the three coadded image for each filter. The multiplicative and additive bias is, respectively, $m=(-0.59\pm0.46)$ per cent and $c=(7.78\pm0.94)10^{-4}$. The multiplicative bias is reduced but the additive bias increased due to the imperfect PSF modeling in one of the spin-2 axes. 
 
 
-
-\begin{figure*}
-	\includegraphics[width=\textwidth]{final_result.pdf}
-    \caption{The multiplicative ($m$) and additive ($c$) bias of several simulation runs. The left panel shows $m$ and $c$ against the sampling factor for each filter. The right panel shows the same for multiband fit result. The number in the parenthesis gives how many filters are used. (3) means J129, H158 and F184 are used, whereas (2) means only J129 and H158 are used. Include the definition of sampling factor. }
-    \label{fig:final_result}
-\end{figure*}
-
-
 \begin{table*}
 	\centering
 	\label{tab:bias_summary}
-	\begin{tabular}[width=0.9*\textwidth]{ c|c|c|c|c|c } 
+	\begin{tabular}[scale=1.4]{ c|c|c|c|c } 
 		\hline
-		Bands & simulation variants & $m_{1}\times10^{-2}$ & $m_{2}\times10^{-2}$ & $c_{1}\times10^{-4}$ & $c_{2}\times10^{-4}$\\
+		simulation variants & $m_{1}\times10^{-2}$ & $m_{2}\times10^{-2}$ & $c_{1}\times10^{-4}$ & $c_{2}\times10^{-4}$\\
 		\hline
-		\multirow{single-band} & single-epochs (J129) & 1.80$\pm$0.67 & 0.28$\pm$0.69 & 6.48$\pm$1.31 & -0.04$\pm$1.51\\
-		& single-epochs (F184) & -0.62$\pm$0.81 & -0.17$\pm$0.79 & 3.92$\pm$1.52 & 2.58$\pm$1.57\\
-		& single-epochs (H158; w/o noise fix) & -1.09$\pm$0.63 & -1.50$\pm$0.68 & 3.90$\pm$1.21 & 1.37$\pm$1.28\\
-		& single-epochs (H158; w/ noise fix) & -1.18$\pm$0.63 & -1.43$\pm$0.67 & 2.14$\pm$1.35 & 1.83$\pm$1.19\\
-		& single-band coadd with oversampling (H158; w/o noise fix) & -0.03$\pm$0.59 & -0.11$\pm$0.67 & 14.10$\pm$1.24 & 2.05$\pm$1.42\\
-		& single-band coadd with oversampling (H158; w/ noise fix) & -1.51$\pm$0.68 & -1.41$\pm$0.66 & 14.79$\pm$1.32 & 4.45$\pm$1.42\\
-		& single-band coadd with oversampling (H158; w/ noise fix, original pixel scale) & -5.89$\pm$0.72 & -5.53$\pm$0.64 & 2.54$\pm$1.25 & 3.09$\pm$1.21\\
-		& single-band coadd with oversampling (H158; w/ noise fix, original pixel scale, diff draw) & -5.49$\pm$0.70 & -5.99$\pm$0.62 & 3.19$\pm$1.20 & 411$\pm$1.33\\
-		& single-band coadd with oversampling (J129) & -0.49$\pm$0.65 & -0.45$\pm$0.62 & 10.50$\pm$1.33 & -3.72$\pm$1.42\\
-		& single-band coadd with oversampling (F184) & 0.47$\pm$0.80 & -0.59$\pm$0.81 & 12.40$\pm$1.67 & 6.32$\pm$1.82\\
-		
-		\multirow{multiband} & multiband single-epochs (gauss) (H158+J129+F184) & -0.66$\pm$0.58 & -0.74$\pm$0.59 & 4.32$\pm$1.17 & 1.60$\pm$1.16 \\
-		& multiband coadd (gauss; H158+J129+F184; all noise fixed; use noise flag turned off) & -2.14$\pm$0.58 & -2.51$\pm$0.58 & 14.17$\pm$1.21 & 4.55$\pm$1.21\\
-		& multiband coadd (gauss; H158+J129+F184; only F184 noise fixed; use noise flag turned off) & -0.61$\pm$0.66 & -0.57$\pm$0.69 & 14.03$\pm$1.25 & 1.54$\pm$1.22\\
-		& multiband coadd (gauss; H158+J129; no noise fix) & -0.39$\pm$0.59 & -0.32$\pm$0.68 & 13.72$\pm$1.24 & 1.85$\pm$1.29\\
-% 		& (v2) multiband coadd (gauss; H158+J129) & -0.36$\pm$0.45 & -0.35$\pm$0.43 & 11.45$\pm$0.93 & 1.83$\pm$0.98\\
+		\textcolor{red}{single-epochs (J129; w/ noise fix)} & 1.30$\pm$0.70 & 0.30$\pm$0.63 & 4.65$\pm$1.45 & 1.33$\pm$1.40\\
+		\textcolor{red}{single-epochs (F184)} & -0.62$\pm$0.81 & -0.17$\pm$0.79 & 3.92$\pm$1.52 & 2.58$\pm$1.57\\
+		\textcolor{red}{single-epochs (H158; w/ noise fix)} & -1.18$\pm$0.63 & -1.43$\pm$0.67 & 2.14$\pm$1.35 & 1.83$\pm$1.19\\
+		\hline
+		\textcolor{red}{single-band coadd with oversampling (H158; w/ noise fix)} & -1.51$\pm$0.68 & -1.41$\pm$0.66 & 14.79$\pm$1.32 & 4.45$\pm$1.42\\
+		\textcolor{red}{single-band coadd with oversampling (J129 w/ noise fix)} & -1.59$\pm$0.64 & -2.31$\pm$0.70 & 11.61$\pm$1.20 & -0.09$\pm$1.34\\
+		\textcolor{red}{single-band coadd with oversampling (F184 w/ noise fix)} & 0.47$\pm$0.80 & -0.59$\pm$0.81 & 12.40$\pm$1.67 & 6.32$\pm$1.82\\
+		\hline
+		\textcolor{red}{multiband single-epochs (gauss) (H158+J129+F184)} & -0.66$\pm$0.58 & -0.74$\pm$0.59 & 4.32$\pm$1.17 & 1.60$\pm$1.16 \\
+		\textcolor{red}{multiband coadd (w/ noise fix)} & -2.16$\pm$0.60 & -2.16$\pm$0.60 & 14.03$\pm$1.13 & 4.44$\pm$1.31\\
 		
 		\hline
 	\end{tabular}
@@ -413,23 +409,41 @@ Next, we pressent the results with multiband measurements. We performed multiban
 	\label{tab:result}
 \end{table*}
 
+\begin{figure*}
+	\includegraphics[scale=0.5]{final_result.pdf}
+    \caption{The multiplicative ($m$) and additive ($c$) bias of several simulation runs. The left panel shows $m$ and $c$ against the sampling factor for each filter. The right panel shows the same for multiband fit result. The number in the parenthesis gives how many filters are used. (3) means J129, H158 and F184 are used, whereas (2) means only J129 and H158 are used. Include the definition of sampling factor. }
+    \label{fig:final_result}
+\end{figure*}
+
+\begin{figure*}
+    \hspace*{-3.5cm}
+    \centering
+	\includegraphics[scale=0.34]{H158_meanshear_measured_properties_perbin.pdf}
+    \caption{H158 coadd, add multiband, do delta e.}
+    \label{fig:meanshear}
+\end{figure*}
+
 
 \section{Discussion}
 \label{sec:discussion}
 
-So far we have seen how \textsc{metacalibration} handles the relatively undersampled \emph{Roman} images without the effect of blending. The proportion of blended galaxies in the COSMOS catalog is xx per cent and it has been found that the galaxy blending at different redshifts could introduce a significant shear-dependent detection bias when calibrated with \textsc{metacalibration} (\citealt{2020ApJ...902..138S}). In the future study, we should investigate the impact of blending in the image simulations to verify if \textsc{metacalibration} is practical in the real survey. 
+So far we have seen how \textsc{metacalibration} handles the relatively undersampled \emph{Roman} images without the effect of blending. However, it has been found that the galaxy blending at different redshifts could introduce a significant shear-dependent detection bias when calibrated with \textsc{metacalibration} (\citealt{2020ApJ...902..138S}). In the future study, we should investigate the impact of blending in the image simulations to verify if \textsc{metacalibration} combined with the new version of \textsc{ngmix} can be the shear calibration algorithm in the real survey. 
 
 
 In the next generation of the simulations, we would like to add the following updates or upgrade these parts of the simulation. 
 \begin{itemize}
-    \item Expand the simulated area by at least 8 times.
-    \item Incorporate the detector effects observed in the real flight candidate detectors.
-    \item Enable the detector effects to be on and off to measure their effects on the final cosmology result.
-    \item Implement the object detection scheme.
-    \item Implement a new coadding methodology which coadds the whole scene instead of individual stamp cutouts (e.g., \texttt{pizza-cutter}\footnote{\url{https://github.com/beckermr/pizza-cutter}})
-    \item Implement selection cuts (e.g., S/N) in the shape catalog.
+    \setlength\itemsep{1em}
+    \item \textbf{Simulation Volume}: Expand the simulated area by at least 8 times. (Troxel et al. in prep.)
+    
+    \item \textbf{Near-Infrared Detectors}: Incorporate the detector effects measured in the real flight candidate detectors and produce two catalogs with and without them to determine the impact on the final cosmology result.
+    
+    \item \textbf{Image Coadditions}: Implement a new coadding methodology which coadds the whole scene instead of individual stamp cutouts (e.g., \textsc{astrodrizzle}\footnote{\url{https://github.com/spacetelescope/drizzlepac}}). With \textsc{astrodrizzle} which employs the linear reconstruction of the individual images, we are able to further mitigate the effect of undersampled \emph{Roman} images. If we set the final coadd pixel scale with \textsc{astrodrizzle} to be 70\% smaller than the original \emph{Roman} pixel scale, F184 will be fully sampled (Q > 2) and J129 will be sampled at the similar level with F184 without coadding. 
+    
+    \item \textbf{Source Detection}: Implement a source detection methodology with \texttt{Photutils}\footnote{\url{https://photutils.readthedocs.io/en/stable/}} on the coadds.
+    
+    \item \textbf{Selection Cuts}: Implement quality assurance cuts (e.g., S/N) on the shape catalog to avoid the noise on the shape fit and compute the measurement biases accounting for the selection effects (\citealt{2017ApJ...841...24S}). 
 \end{itemize}
-With these potential changes, we would like to produce a reference image and shape catalog that can be widely used by other communities. 
+\textcolor{red}{With these potential changes, we will produce a reference image and shape catalog that can be widely used by other communities.}
 
 
 \section{Conclusions}
@@ -440,7 +454,7 @@ By coadding the single-epoch images and oversampling the PSF for a better shape 
 
 
 
-\section*{Acknowledgements}
+\section{Acknowledgements}
 
 We thank Matthew Becker, Erin Sheldon, and Arun Kannawadi for many useful discussions. This work was supported by xx funding agencies.
 
@@ -461,41 +475,16 @@ We thank Matthew Becker, Erin Sheldon, and Arun Kannawadi for many useful discus
 \bibliography{example} % if your bibtex file is called example.bib
 
 
-% Alternatively you could enter them by hand, like this:
-% This method is tedious and prone to error if you have lots of references
-%\begin{thebibliography}{99}
-%\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
-%Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
-%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
-%Others S., 2012, Journal of Interesting Stuff, 17, 198
-%\end{thebibliography}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
 
 \appendix
 
-% \section{Coadding of F184 single epochs}
-% \label{app:coadd_F}
+\section{Simple Simulations}
+\label{app:coadd_F}
 % If you want to present additional material which would interrupt the flow of the main paper,
 % it can be placed in an Appendix which appears after the list of references.
 
-% \begin{table*}
-% 	\centering
-% 	\label{tab:bias_F}
-% 	\begin{tabular}[width=0.9*\textwidth]{ c|c|c|c|c } 
-% 		\hline
-% 		simulation variants & $m_{1}\times10^{-2}$ & $m_{2}\times10^{-2}$ & $c_{1}\times10^{-4}$ & $c_{2}\times10^{-4}$\\
-% 		\hline
-% 		single-epochs (F184) & -0.62+-0.81 & -0.17+-0.79 & 3.92+-1.52 & 2.58+-1.57\\
-% 		single-band coadd (F184) & 4.62$\pm$0.80 & 5.09$\pm$0.88 & -2.16$\pm$1.61 & -4.19$\pm$1.69\\
-% 		single-band coadd with oversampling (F184) & 0.47$\pm$0.80 & -0.59$\pm$0.81 & 12.40$\pm$1.67 & 6.32$\pm$1.82\\
-% 		multiband coadd with oversampling (F184+H158+J129) & 2.29$\pm$0.73 & 2.74$\pm$0.73 & 18.24$\pm$1.52 & 0.72$\pm$1.52\\
-% 		\hline
-% 	\end{tabular}
-% 	\caption{Shear calibration bias for different simulation runs.}
-% \end{table*}
+
 
 % fitgauss or gauss appendix
 % \begin{table*}
