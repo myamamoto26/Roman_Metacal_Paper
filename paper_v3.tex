@@ -73,7 +73,7 @@
 % If you need two or more lines of authors, add an extra line using \newauthor
 \author[M. Yamamoto et al.]{
 Masaya Yamamoto,$^{1}$\thanks{E-mail: masaya.yamamoto@duke.edu}
-Michael A. Troxel,$^{1}$
+M. A. Troxel,$^{1}$
 Mike Jarvis,$^{2}$
 Rachel Mandelbaum,$^{3}$
 Christopher Hirata,$^{4,5,6}$
@@ -263,7 +263,7 @@ In order to accomplish the science goals, and build and test weak lensing calibr
 
 \subsection{Simulation Runtime, Data Products, and Data Access}
 The simulations here match those produced in T21, but with different true shear values, and so information about processing and data volume prior to the processing additions described in this paper match that provided in App. D of T21.
-The runtime of the shape measurement in the simulations and data volume on disk of the shape catalogs (5 \textsc{metacalibration} catalogs for one of four shear sets) is summarized in Table \ref{tab:data} for each of the different simulation runs. The simulations are run on the Duke Compute Cluster,\footnote{\url{https://oit-rc.pages.oit.duke.edu/rcsupportdocs/dcc/}}, with solid-state disks for the simulation I/O. The time it takes to process one MEDS file is shown. The simulation is composed of a total of 480 MEDS files, for a total run time of about 2381 CPU hours for the multi-band coadd measurement.
+The runtime of the shape measurement per MEDS region in the simulations and data volume on disk of the full shape catalogs (5 \textsc{metacalibration} catalogs for one of four shear sets) is summarized in Table \ref{tab:data} for each of the different simulation runs. The simulations are run on the Duke Compute Cluster,\footnote{\url{https://oit-rc.pages.oit.duke.edu/rcsupportdocs/dcc/}}, with solid-state disks for the simulation I/O. The time it takes to process one MEDS file is shown. The simulation is composed of a total of 480 MEDS files, for a total run time of about 2381 CPU hours for the multi-band coadd measurement.
 
 The new measurement catalogs produced in this work are available by request to the authors.
 \begin{table}
@@ -441,7 +441,7 @@ Figures \ref{fig:ngmix_measured_properties} shows the true magnitude and size an
 
 \subsection{Shear Calibration Bias}
 \label{subsec:shapes}
-We estimate the levels of shear calibration bias associated with calibrating shapes with \textsc{metacalibration} in \emph{Roman} images as described in Sec. \ref{subsec:mcal}. The multiplicative and additive bias values listed in the text are the average of $m_{1}$ and $m_{2}$, and $c_{1}$ and $c_{2}$. The comprehensive results can be found in Table \ref{tab:bias_summary} and Fig. \ref{fig:final_result} shows the single-band coadd result compared to the previously non-calibrated bias estimates in T21. These multiple simulation variants were run to achieve three milestones. One is to characterize how much the shear bias exists if we were to use the original, undersampled images, by recovering shears from the single exposures in each bandpass. Second is to verify if coadding can mitigate the effect of undersampling. Lastly, as the final assessment we investigate how combining the three bandpasses can result in better constraining the recovered shear.
+We estimate the levels of shear calibration bias associated with calibrating shapes with \textsc{metacalibration} in \emph{Roman} images as described in Sec. \ref{subsec:mcal}. The multiplicative and additive bias values listed in the text are the average of $m_{1}$ and $m_{2}$, and $c_{1}$ and $c_{2}$. The comprehensive results can be found in Table \ref{tab:bias_summary} and Fig. \ref{fig:final_result} shows the single-band single exposures and coadd results compared. These multiple simulation variants were run to achieve three milestones. One is to characterize how much the shear bias exists if we were to use the original, undersampled images, by recovering shears from the single exposures in each bandpass. Second is to verify if coadding can mitigate the effect of undersampling. Lastly, as the final assessment we investigate how combining the three bandpasses can result in better constraining the recovered shear.
 
 
 For the single-band measurements, we can use the sampling factor defined in Equation \ref{eqn:sampling} per bandpass to show the relationship between the shear bias and image sampling. The sampling factor is an indication of how undersampled the image is in each bandpass. The sampling factor for each single-band measurement can be found in Table \ref{tab:bias_summary}. This relationship between sampling factor and shear bias was previously explored in \citealt{2021MNRAS.502.4048K} using \emph{Euclid} simulation with different shape measurement algorithms, where they found that the estimated multiplicative bias has a relatively large dependence on the sampling factor. Their result can be extrapolated to our single-band single-epoch results. The multiplicative bias of single-band single-epoch measurements is consistent with zero within 2$\sigma$ in each filter, with mean uncertainty $\sigma_m$=0.72\%, except for $m_{2}=(-1.61\pm0.66)\%$ in H158, which is slightly larger. This level of bias is consistent with the finding from K21. 
@@ -449,9 +449,10 @@ For the single-band measurements, we can use the sampling factor defined in Equa
 
 When the coadded images for each filter are used, the recovered multiplicative shear bias is about half the single-epoch cases due to the increased S/N and better image sampling, and is consistent with zero at the $\sim$1$\sigma$ level. The additive bias remains at a similar level within uncertainties. The estimated additive bias is the same order as that found in the Y3 analysis in DES, which uses a similar shear calibration pipeline. 
 
-Finally, we discuss the results with multi-band measurements. We performed multi-band measurements with the three filters used in the previous measurements. One multi-band measurement used all of the single epoch images from all the filters and jointly fit the shape of the galaxy. The multiplicative and additive bias is, respectively, $m=(-1.34\pm0.67)$\% and $c=(2.58\pm1.26)10^{-4}$. This result generally agrees with the single-band single-epochs measurements, and is consistent with zero bias at the $\sim$2$\sigma$ level. The other measurement is performed as a joint-fit across the coadd images for each filter. The multiplicative and additive bias is, respectively, $m=(-1.13\pm0.60)\%$ and $c=(2.38\pm1.24)10^{-4}$. These results are again consistent with zero at the 2$\sigma$ level, so we can't conclude more than that this result may be acceptable, without significantly larger simulation volume. To reach the requirements level for the \emph{Roman} HLIS, we will likely need approx. 2000 deg$^{2}$ of simulated imaging for this complex simulation mode. 
+Finally, we discuss the results with multi-band measurements. We performed multi-band measurements with the three filters used in the previous measurements. One multi-band measurement used all of the single epoch images from all the filters and jointly fit the shape of the galaxy. The multiplicative and additive bias is, respectively, $m=(-1.34\pm0.67)$\% and $c=(2.58\pm1.26)\times10^{-4}$. This result generally agrees with the single-band single-epochs measurements, and is consistent with zero bias at the $\sim$2$\sigma$ level. The other measurement is performed as a joint-fit across the coadd images for each filter. The multiplicative and additive bias is, respectively, $m=(-1.13\pm0.60)\%$ and $c=(2.38\pm1.24)\times10^{-4}$. These results are again consistent with zero at the 2$\sigma$ level, so we can't conclude more than that this result may be acceptable, without significantly larger simulation volume. To reach the requirements level for the \emph{Roman} HLIS, we will likely need approx. 2000 deg$^{2}$ of simulated imaging for this complex simulation mode. 
 
-To further explore the shape catalogs, we performed a set of basic null tests and show representative results for $e_1$ for the the H158 single-epoch and coadd catalogs, and multi-band coadd catalog. The null tests should show that the mean shear residual ($\langle \Delta e_{1} \rangle$) should be zero (flat) in the absence of any systematic biases. Figure \ref{fig:meanshear} shows the relationship between the mean shear and several input and measured properties of galaxies for all the measurement cases. We find no significant trends in mean shear vs. signal-to-noise or vs PSF properties, which are not included in the figure. The mean shear does show a non-linear trend correlating with measured galaxy size. To investigate this, we show in Fig. \ref{fig:sizecorrelation} how the true and measured shape and size are related. Since there is no trend in either true or measured shape and size vs. measured or true values, respectively, the trend in the observed shape vs observed size must be a more subtle effect correlating the measured size and shape. Since there is no trend vs. true properties, we will check if this signal persists in future simulation and pipeline updates.
+To further explore the shape catalogs, we performed a set of basic null tests and show representative results for $e_1$ for the the H158 single-epoch and coadd catalogs, and multi-band coadd catalog. The null tests should show that the mean shear residual ($\langle \Delta e_{1} \rangle$) should be zero (flat) in the absence of any systematic biases. Figure \ref{fig:meanshear} shows the relationship between the mean shear and several input and measured properties of galaxies for all the measurement cases. We find no significant trends in mean shear vs. galaxy properties or vs PSF properties, which are not included in the figure. 
+% The mean shear does show a non-linear trend correlating with measured galaxy size. To investigate this, we show in Fig. \ref{fig:sizecorrelation} how the true and measured shape and size are related. Since there is no trend in either true or measured shape and size vs. measured or true values, respectively, the trend in the observed shape vs observed size must be a more subtle effect correlating the measured size and shape. Since there is no trend vs. true properties, we will check if this signal persists in future simulation and pipeline updates.
 
 
 \begin{table*}
@@ -479,31 +480,31 @@ To further explore the shape catalogs, we performed a set of basic null tests an
 
 \begin{figure*}
 	\includegraphics[width=\textwidth]{final_result_v4.pdf}
-    \caption{The multiplicative ($m \times 10^2$) (\textbf{left}) and additive ($c \times 10^4$) (\textbf{right}) bias of the single-band single-epoch and coadd measurements. From the left and to the right data points, they represent J129 single-epoch, H158 single-epoch, J129 coadd, F184 single-epoch, H158 coadd and F184 coadd measurements. The non-calibrated results from the first-generation of the simulations by \cite{2021MNRAS.501.2044T} were $m_1=(-7.56\pm0.19)\times10^{-2}$, $m=(-9.49\pm0.19)\times10^{-2}$ and $c_1=(1.20\pm0.17)\times10^{-3}$, $c_2=(-1.57\pm0.16)\times10^{-3}$. We can conclude that our calibration bias is an order of magnitude smaller than the previous versions of the simulations, and comparable or smaller than the bias-level seen in the Stage-III surveys.}
+    \caption{The multiplicative ($m \times 10^2$) (\textbf{left}) and additive ($c \times 10^4$) (\textbf{right}) bias of the single-band single-epoch and coadd measurements. From the left and to the right data points, they represent J129 single-epoch, H158 single-epoch, J129 coadd, F184 single-epoch, H158 coadd and F184 coadd measurements. The non-calibrated results from the first-generation of the simulations by \cite{2021MNRAS.501.2044T} were $m_1=(-7.56\pm0.19)\%$, $m=(-9.49\pm0.19)\%$ and $c_1=(1.20\pm0.17)\times10^{-3}$, $c_2=(-1.57\pm0.16)\times10^{-3}$. We can conclude that our calibration bias is an order of magnitude smaller than the previous versions of the simulations, and comparable or smaller than the bias-level seen in the Stage-III surveys.}
     \label{fig:final_result}
 \end{figure*}
 
 \begin{figure*}
     %\hspace*{-3.5cm}
     \centering
-	\includegraphics[width=\textwidth]{H158_meanshear_measured_properties_perbin_e1_v4.pdf}
-    \caption{This shows the mean shear residual ($\Delta e_{1}$; $\langle e_{1,measured} \rangle - \langle e_{1,expected} \rangle$) as a function of various properties of galaxies for H158 single-band single-epochs, coadds, and multi-band measurements. We are only showing the $e_1$ residual because $e_{2}$ showed similar behaviors in each test. \textbf{Left}: the measured S/N shows a null signal. \textbf{Middle}: the true galaxy size shows a null signal. \textbf{Right}: the measured galaxy size shows a non-null signal, where this is mainly caused by the correlation between the true shapes of galaxies and the measured size in \textsc{ngmix}. This is explained in more detail in Fig. \ref{fig:sizecorrelation}. In this plot, the shear response is computed in each bin to account for the selection bias.}
+	\includegraphics[width=\textwidth]{H158_meanshear_measured_properties_perbin_e1_v6.pdf}
+    \caption{This shows the mean shear residual ($\Delta e_{1}$; $\langle e_{1,measured} \rangle - \langle e_{1,expected} \rangle$) as a function of various properties of galaxies for H158 single-band single-epochs, coadds, and multi-band measurements. We are only showing the $e_1$ residual because $e_{2}$ showed similar behaviors in each test. \textbf{Left}: the measured S/N shows a null signal. \textbf{Middle}: the true galaxy size shows a null signal. \textbf{Right}: the measured galaxy size shows a null signal. The mean shear is computed with the shear response and selection response in each bin to account for the selection bias.}
     \label{fig:meanshear}
 \end{figure*}
 
-\begin{figure}
-    %\hspace*{-3.5cm}
-    \centering
-	\includegraphics[width=\columnwidth]{H158_true_obs_e1_size.pdf}
-    \caption{This shows the correlations between true and measured shape and size of galaxies. \textbf{Left}: the true galaxy shape ($e_1$) in the bins of measured galaxy size (arcsec$^2$). \textbf{Right}: the measured galaxy shape ($e_1$) in the bins of input galaxy size (arcsec).}
-    \label{fig:sizecorrelation}
-\end{figure}
+% \begin{figure}
+%     %\hspace*{-3.5cm}
+%     \centering
+% 	\includegraphics[width=\columnwidth]{H158_true_obs_e1_size.pdf}
+%     \caption{This shows the correlations between true and measured shape and size of galaxies. \textbf{Left}: the true galaxy shape ($e_1$) in the bins of measured galaxy size (arcsec$^2$). \textbf{Right}: the measured galaxy shape ($e_1$) in the bins of input galaxy size (arcsec).}
+%     \label{fig:sizecorrelation}
+% \end{figure}
 
 
 \section{Future simulation needs and plan}
 \label{sec:discussion}
 
-We have investigated how \textsc{metacalibration} handles the complex \emph{Roman} PSF and undersampled images without accounting for the effect of blending. However, it has been found that galaxy blending at different redshifts could introduce a significant shear-dependent detection bias when calibrated with \textsc{metacalibration} (e.g., \citealt{2020ApJ...902..138S}, \citealt{2020arXiv201208567M}). In future studies, we will investigate the impact of blending in Roman image simulations and implement an extended pipeline to correct shear-dependent blending/detection biases (e.g.,  \textsc{metadetection}) to explore more realistic shear calibration for the real survey. 
+We have investigated how \textsc{metacalibration} handles the complex \emph{Roman} PSF and undersampled images without accounting for the effect of blending. However, it has been found that galaxy blending at different redshifts could introduce a significant shear-dependent detection bias when calibrated with \textsc{metacalibration} (e.g., \citealt{2020ApJ...902..138S}, \citealt{2020arXiv201208567M}). In future studies, we will investigate the impact of blending in \emph{Roman} image simulations and implement an extended pipeline to correct shear-dependent blending/detection biases (e.g.,  \textsc{metadetection}) to explore more realistic shear calibration for the real survey. 
 
 
 Our team continues to increase the realism of the image simulations for future weak lensing calibration analyses. In the next generation of these simulations, we expect to include the following updates or upgrade these parts of the simulation. 
